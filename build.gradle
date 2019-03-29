@@ -1,0 +1,66 @@
+buildscript {
+    ext {
+        spring_boot_version = '2.1.3.RELEASE'
+        scala_version = '2.11.12'
+    }
+    repositories {
+        maven { url "https://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+    }
+}
+//plugins {
+//    id 'org.springframework.boot' version '2.1.3.RELEASE'
+//}
+
+ext {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    spring_boot_version = '2.1.3.RELEASE'
+    scala_version = '2.12.2'
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+group = 'org.repl'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+jar {
+    baseName = 'spring-boot-scala-jpa'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "org.scala-lang:scala-library:$scala_version"
+    implementation "org.scala-lang:scala-reflect:$scala_version"
+    implementation "org.scala-lang:scala-compiler:$scala_version"
+
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("com.h2database:h2")
+
+    // Jackson Dependencies
+    implementation "com.fasterxml.jackson.core:jackson-core:2.9.8"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.9.8"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.9.8"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8"
+    implementation group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.12', version: '2.9.8'
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
